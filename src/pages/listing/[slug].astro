@@ -1,11 +1,10 @@
 ---
 import type { GetStaticPaths } from "astro";
-import {articlesList} from "../../queries/articles.js"
-import { Image } from "astro:assets";
+import { listingList } from "../../queries/listings.js"
 import MainLayout from "../../layouts/MainLayout.astro";
 
 export const getStaticPaths = (async () => {
-  return articlesList.posts.data.map(({ attributes }) => ({
+  return listingList.listings.data.map(({ attributes }) => ({
     params: { slug: attributes.slug },
     props: attributes
   }));
@@ -14,9 +13,6 @@ export const getStaticPaths = (async () => {
 const articleData = Astro.props
 ---
 <MainLayout>
-
-<Image src={articleData.image.data.attributes.url} alt={articleData.image.data.attributes.alternativeText || "altvbgh"} width="200" height="200" ></Image>
-
 
 <h1>{articleData.name}</h1>
 

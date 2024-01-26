@@ -1,6 +1,6 @@
 ---
 import SingleArticle from "../../components/SingleArticle.astro"
-import {articlesList} from "../../queries/articles.js"
+import { listingList } from "../../queries/listings.js"
 
 import Header from "../../components/Header.astro"
 ---
@@ -9,11 +9,11 @@ import Header from "../../components/Header.astro"
 
 </Header>
 
-<h1>bllog</h1>
+<h1>Listing</h1>
 
 <div style="display: flex;">
 {
-    articlesList.posts.data.map((item) => (
+    listingList.posts.data.map((item) => (
         <SingleArticle url={item.attributes.slug} image={item.attributes.image} name={item.attributes.name} />
     ))
 }
