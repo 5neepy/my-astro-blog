@@ -1,7 +1,8 @@
 ---
 import type { GetStaticPaths } from "astro";
 import { listingList } from "../../queries/listings.js"
-import MainLayout from "../../layouts/MainLayout.astro";
+import ServiceListing from "../../layouts/ServiceListing.astro";
+import { Image } from "astro:assets";
 
 export const getStaticPaths = (async () => {
   return listingList.listings.data.map(({ attributes }) => ({
@@ -10,10 +11,63 @@ export const getStaticPaths = (async () => {
   }));
 }) satisfies GetStaticPaths;
 
-const articleData = Astro.props
+const listingData = Astro.props
 ---
-<MainLayout>
-
-<h1>{articleData.name}</h1>
-
-</MainLayout>
+<ServiceListing title={listingData.seo_title} description={listingData.seo_desc}>
+  <header></header>
+  <main>
+    <section>
+      <div>
+        <h1>{listingData.biz_name}</h1>
+        <h2>{listingData.main_value}</h2>
+        <p>{listingData.mv_info}</p>
+        <div>
+          <a href="/" class="default-button">{listingData.cta_1}</a>
+          <div></div>
+        </div>
+      </div>
+      <div>
+        <Image src={listingData.klient_img.data.attributes.url} alt={listingData.klient_img.data,attributes.alternativeText}>
+      </div>
+    </section>
+      <section>
+        <h2>{listingData.sc_hook}</h2>
+        <div>
+          <div>
+            <div>{listingData.ico1}</div>
+            <h3>{listingData.bnf1}</h3>
+            <p>{listingData.bnf1_info}</p>
+          </div>
+          <div>
+            <div>{listingData.ico2}</div>
+            <h3>{listingData.bnf2}</h3>
+            <p>{listingData.bnf2_info}</p>
+          </div>
+          <div>
+            <div>{listingData.ico3}</div>
+            <h3>{listingData.bnf3}</h3>
+            <p>{listingData.bnf3_info}</p>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div>
+          <h2>{listingData.nas_title}</h2>
+          <p>{listingData.nas_info}</p>
+          <a href="" class="default-button">{listingData.cta_2}</a>
+        </div>
+        <div>
+          <Image src={listingData.img_me.data.attributes.url} alt={listingData.img_me.data,attributes.alternativeText}>
+        </div>
+      </section>
+      <section>
+        <h2>{listingData.features_title}</h2>
+        <div>{listingData.ft}</div>
+      </section>
+      <section>
+        <h2>{listingData.faq_title}</h2>
+        <div>{listingData.faq}</div>
+      </section>
+  </main>
+  <footer></footer>
+</ServiceListing>

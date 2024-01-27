@@ -1,20 +1,16 @@
 ---
-import SingleArticle from "../../components/SingleArticle.astro"
+import SinglePost from "../../components/SinglePost.astro"
 import {articlesList} from "../../queries/articles.js"
 
-import Header from "../../components/Header.astro"
+import MainLayout from "../../layouts/MainLayout.astro"
 ---
 
-<Header>
-
-</Header>
-
-<h1>bllog</h1>
-
+<MainLayout>
 <div style="display: flex;">
 {
     articlesList.posts.data.map((item) => (
-        <SingleArticle url={item.attributes.slug} image={item.attributes.image} name={item.attributes.name} />
+        <SinglePost slug={item.attributes.slug} image={item.attributes.image} name={item.attributes.name} />
     ))
 }
 </div>
+</MainLayout>
