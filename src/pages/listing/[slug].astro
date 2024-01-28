@@ -13,51 +13,155 @@ export const getStaticPaths = (async () => {
 
 const listingData = Astro.props
 ---
+<style>
+  :root {
+  --dark-color: #01161E;
+  --main-col: #124559;
+  --accent-clr-1: #598392;
+  --accent-clr-2: #AEC3B0;
+  --bg-color: #EFF6E0;
+
+}
+
+  body {
+    display: flex;
+    justify-content: center;
+  }
+
+  main {
+    width: 1200px;
+  }
+
+  section {
+    margin-top: 50px
+  }
+
+  h1, h2, h3, h4 {
+    font-family: "Ubuntu";
+  }
+
+  a, p {
+    font-family: "Open Sans";
+    font-size: 18px;
+  }
+
+  .button-wrap {
+    margin-top: 50px;
+  }
+
+  .default-button {
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: var(--accent-clr-2);
+    padding: 10px 5px;
+    margin: 100px 0px;
+    border-radius: 3px;
+    border: var(--dark-color) 1px solid;
+  }
+
+  .abovethefold {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+  }
+
+  .image-cont {
+    background-color: red;
+  }
+
+  #klient {
+    width: 500px;
+    height: 450px;
+  }
+
+  .benefits {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .benefits > div {
+    display: flex;
+    gap: 30px;
+    margin: 20px;
+  }
+
+  .benefits > div > div {
+    width: 250px;
+    border: var(--dark-color) 1px solid;
+    border-radius: 30px;
+    padding: 15px;
+  }
+
+  .icon-box {
+    width: 45px;
+    height: 45px;
+  }
+
+  .za-nas {
+    display: flex;
+  }
+
+  .za-nas-text {
+    width: 50%;
+  }
+
+  #img_me {
+    width: 500px;
+    height: 450px;
+  }  
+</style>
+
 <ServiceListing title={listingData.seo_title} description={listingData.seo_desc}>
   <header></header>
   <main>
-    <section>
+    <section class="abovethefold">
       <div>
         <h1>{listingData.biz_name}</h1>
         <h2>{listingData.main_value}</h2>
         <p>{listingData.mv_info}</p>
-        <div>
-          <a href="/" class="default-button">{listingData.cta_1}</a>
+        <div class="button-wrap">
+          <a href="tel:0888895895" class="default-button">{listingData.cta_1}</a>
           <div></div>
         </div>
       </div>
-      <div>
-        <Image src={listingData.klient_img.data.attributes.url} alt={listingData.klient_img.data,attributes.alternativeText}>
+      <div id="klient" class="image-cont">
+        <!-- <Image src={listingData.klient_img.data.attributes.url} alt={listingData.klient_img.data,attributes.alternativeText}> -->
       </div>
     </section>
-      <section>
+      <section class="benefits">
         <h2>{listingData.sc_hook}</h2>
         <div>
           <div>
-            <div>{listingData.ico1}</div>
+            <div class="icon-box" set:html={listingData.ico1}></div>
             <h3>{listingData.bnf1}</h3>
             <p>{listingData.bnf1_info}</p>
           </div>
           <div>
-            <div>{listingData.ico2}</div>
+            <div class="icon-box" set:html={listingData.ico2}></div>
             <h3>{listingData.bnf2}</h3>
             <p>{listingData.bnf2_info}</p>
           </div>
           <div>
-            <div>{listingData.ico3}</div>
+            <div class="icon-box" set:html={listingData.ico3}></div>
             <h3>{listingData.bnf3}</h3>
             <p>{listingData.bnf3_info}</p>
           </div>
         </div>
       </section>
-      <section>
-        <div>
+      <section class="za-nas">
+        <div class="za-nas-text">
           <h2>{listingData.nas_title}</h2>
           <p>{listingData.nas_info}</p>
+          <div class="button-wrap">
           <a href="" class="default-button">{listingData.cta_2}</a>
+          </div>
         </div>
-        <div>
-          <Image src={listingData.img_me.data.attributes.url} alt={listingData.img_me.data,attributes.alternativeText}>
+        <div id="img_me" class="image-cont">
+          <!-- <Image src={listingData.img_me.data.attributes.url} alt={listingData.img_me.data,attributes.alternativeText}> -->
         </div>
       </section>
       <section>
