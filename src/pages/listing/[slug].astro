@@ -1,27 +1,27 @@
 ---
 import type { GetStaticPaths } from "astro";
-import { listingList } from "../../queries/listings.js"
+import { listingList } from "../../queries/listings.js";
 import ServiceListing from "../../layouts/ServiceListing.astro";
 import { Image } from "astro:assets";
 
 export const getStaticPaths = (async () => {
   return listingList.listings.data.map(({ attributes }) => ({
     params: { slug: attributes.slug },
-    props: attributes
+    props: attributes,
   }));
 }) satisfies GetStaticPaths;
 
-const listingData = Astro.props
+const listingData = Astro.props;
 ---
+
 <style>
   :root {
-  --dark-color: #01161E;
-  --main-col: #124559;
-  --accent-clr-1: #598392;
-  --accent-clr-2: #AEC3B0;
-  --bg-color: #EFF6E0;
-
-}
+    --dark-color: #01161e;
+    --main-col: #124559;
+    --accent-clr-1: #598392;
+    --accent-clr-2: #aec3b0;
+    --bg-color: #eff6e0;
+  }
 
   body {
     display: flex;
@@ -33,14 +33,18 @@ const listingData = Astro.props
   }
 
   section {
-    margin-top: 50px
+    margin-top: 50px;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: "Ubuntu";
   }
 
-  a, p {
+  a,
+  p {
     font-family: "Open Sans";
     font-size: 18px;
   }
@@ -65,10 +69,6 @@ const listingData = Astro.props
     display: flex;
     justify-content: space-between;
     margin: 0;
-  }
-
-  .image-cont {
-    background-color: red;
   }
 
   #klient {
@@ -112,10 +112,13 @@ const listingData = Astro.props
   #img_me {
     width: 500px;
     height: 450px;
-  }  
+  }
 </style>
 
-<ServiceListing title={listingData.seo_title} description={listingData.seo_desc}>
+<ServiceListing
+  title={listingData.seo_title}
+  description={listingData.seo_desc}
+>
   <header></header>
   <main>
     <section class="abovethefold">
@@ -124,29 +127,34 @@ const listingData = Astro.props
         <h2>{listingData.main_value}</h2>
         <p>{listingData.mv_info}</p>
         <div class="button-wrap">
-          <a href="tel:0888895895" class="default-button">{listingData.cta_1}</a>
+          <a href="tel:0888895895" class="default-button">{listingData.cta_1}</a
+          >
           <div></div>
         </div>
       </div>
       <div id="klient" class="image-cont">
-        <!-- <Image src={listingData.klient_img.data.attributes.url} alt={listingData.klient_img.data,attributes.alternativeText}> -->
+        <Image
+          src={listingData.klient_img.data.attributes.url}
+          alt={listingData.klient_img.data.attributes.alternativeText}
+          width={100}
+          height={100}
+        />
       </div>
-    </section>
       <section class="benefits">
         <h2>{listingData.sc_hook}</h2>
         <div>
           <div>
-            <div class="icon-box" set:html={listingData.ico1}></div>
+            <div class="icon-box" set:html={listingData.ico1} />
             <h3>{listingData.bnf1}</h3>
             <p>{listingData.bnf1_info}</p>
           </div>
           <div>
-            <div class="icon-box" set:html={listingData.ico2}></div>
+            <div class="icon-box" set:html={listingData.ico2} />
             <h3>{listingData.bnf2}</h3>
             <p>{listingData.bnf2_info}</p>
           </div>
           <div>
-            <div class="icon-box" set:html={listingData.ico3}></div>
+            <div class="icon-box" set:html={listingData.ico3} />
             <h3>{listingData.bnf3}</h3>
             <p>{listingData.bnf3_info}</p>
           </div>
@@ -157,21 +165,27 @@ const listingData = Astro.props
           <h2>{listingData.nas_title}</h2>
           <p>{listingData.nas_info}</p>
           <div class="button-wrap">
-          <a href="" class="default-button">{listingData.cta_2}</a>
+            <a href="" class="default-button">{listingData.cta_2}</a>
           </div>
         </div>
         <div id="img_me" class="image-cont">
-          <!-- <Image src={listingData.img_me.data.attributes.url} alt={listingData.img_me.data,attributes.alternativeText}> -->
+          <Image
+            src={listingData.img_me.data.attributes.url}
+            alt={listingData.img_me.data.attributes.alternativeText}
+            width={200}
+            height={200}
+          />
         </div>
+        <section>
+          <h2>{listingData.features_title}</h2>
+          <div>{listingData.ft}</div>
+        </section>
+        <section>
+          <h2>{listingData.faq_title}</h2>
+          <div>{listingData.faq}</div>
+        </section>
       </section>
-      <section>
-        <h2>{listingData.features_title}</h2>
-        <div>{listingData.ft}</div>
-      </section>
-      <section>
-        <h2>{listingData.faq_title}</h2>
-        <div>{listingData.faq}</div>
-      </section>
+      <footer></footer>
+    </section>
   </main>
-  <footer></footer>
 </ServiceListing>

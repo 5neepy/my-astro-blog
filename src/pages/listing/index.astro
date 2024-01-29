@@ -1,20 +1,24 @@
 ---
-import SinglePost from "../../components/SinglePost.astro"
-import { listingList } from "../../queries/listings.js"
+import SinglePost from "../../components/SinglePost.astro";
+import { listingList } from "../../queries/listings.js";
 
-import MainLayout from "../../layouts/MainLayout.astro"
+console.log(listingList.listings.data);
+
+import MainLayout from "../../layouts/MainLayout.astro";
 ---
 
 <MainLayout title="test" description="test">
+  <h1>Listing</h1>
 
-<h1>Listing</h1>
-
-<div style="display: flex;">
-{
-    listingList.listings.data.attributes.map((item) => (
-        <SinglePost slug={item.slug} name={item.name} />
-    ))
-}
-</div>
-
+  <div style="display: flex;">
+    {
+      listingList.listings.data.map(({ attributes }) => {
+        <SinglePost
+          slug={attributes.slug}
+          name={attributes.biz_name}
+          image={attributes.klient_img}
+        />;
+      })
+    }
+  </div>
 </MainLayout>
